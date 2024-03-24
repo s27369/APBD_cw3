@@ -46,5 +46,10 @@
 		{
 			return "KON-";
 		}
+
+		public int getTotalWeight()
+		{
+			return _cargoMass + _containerMass;
+		}
 	}
 }
