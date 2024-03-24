@@ -1,39 +1,50 @@
-﻿namespace cw3;
-
-public abstract class Container
+﻿namespace Zadanie3
 {
-	private int CargoMass { get; set;}
-	int Height {get; set;}
-	int ContainerMass {get; set;}
-	int Depth {get; set;}
-	int MaxCapacity {get; set;}
-	string SerialNumber {get; set;}
-	private static int counter = 1;
-
-	public Container(int CargoMass, int Height, int ContainerMass, int Depth, int MaxCapacity)
+	public abstract class Container
 	{
-		CargoMass = CargoMass;
-		Height = Height;
-		ContainerMass = ContainerMass;
-		Depth = Depth;
-		MaxCapacity = MaxCapacity;
-		SerialNumber = getSerialNumber();
-	}
+		protected int _cargoMass { get; set; }
+		protected int _height { get; set; }
+		protected int _containerMass { get; set; }
+		protected int _depth { get; set; }
+		protected int _maxCapacity { get; set; }
+		protected string _serialNumber { get; set; }
+		protected static int counter2 = 1;
+		protected static int counter { get; } = counter2++;
 
-	
-	public virtual void Empty()
-	{
-		CargoMass=0;	
-	}
+		public Container(int CargoMass, int Height, int ContainerMass, int Depth, int MaxCapacity)
+		{
+			_cargoMass = CargoMass;
+			_height = Height;
+			_containerMass = ContainerMass;
+			_depth = Depth;
+			_maxCapacity = MaxCapacity;
+			_serialNumber = getSerialNumber();
+		}
 
-	public virtual void LoadCargo(int weight)
-	{
-		if (weight < 0) 
-			throw IncorrectCargoMass("Cargo mass can't be " + weight);
-		if (this.CargoMass + weight > this.MaxCapacity)
-			throw OverfillException("Capacity for cargo exceeded by " + (this.MaxCapacity - this.CargoMass + weight));
-		this.CargoMass += weight;
-	}
 
-	public virtual string getSerialNumber();
+		public virtual void Empty()
+		{
+			_cargoMass = 0;
+		}
+
+		public virtual void LoadCargo(int weight)
+		{
+			if (weight < 0)
+			{
+				throw new IncorrectCargoMass("Cargo mass can't be " + weight);
+			}
+			if (this._cargoMass + weight > this._maxCapacity)
+			{
+				throw new OverfillException(
+					"Capacity for cargo exceeded by " + (this._maxCapacity - this._cargoMass + weight));
+			}
+				
+			this._cargoMass += weight;
+		}
+
+		public virtual string getSerialNumber()
+		{
+			return "KON-";
+		}
+	}
 }

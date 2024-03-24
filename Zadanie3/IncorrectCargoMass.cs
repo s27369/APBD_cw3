@@ -1,6 +1,10 @@
-﻿namespace Zadanie3;
-
-public class IncorrectCargoMass:SystemException
+﻿namespace Zadanie3
 {
-    public IncorrectCargoMass(string? message) : base(message){}
+
+    public class IncorrectCargoMass : SystemException
+    {
+        public IncorrectCargoMass(string? message) : base(message)
+        {
+        }
+    }
 }

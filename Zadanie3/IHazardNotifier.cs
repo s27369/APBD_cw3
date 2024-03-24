@@ -1,6 +1,7 @@
-﻿namespace Zadanie3;
-
-public interface IHazardNotifier
+﻿namespace Zadanie3
 {
-    public void SendHazardNotification();
+    public interface IHazardNotifier
+    {
+        public void SendHazardNotification();
+    }
 }

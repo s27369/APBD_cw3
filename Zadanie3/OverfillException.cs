@@ -1,6 +1,9 @@
-﻿namespace Zadanie3;
-
-public class OverfillException: SystemException
+﻿namespace Zadanie3
 {
-    public OverfillException(string message) : base(message) { }
+    public class OverfillException : SystemException
+    {
+        public OverfillException(string message) : base(message)
+        {
+        }
+    }
 }
