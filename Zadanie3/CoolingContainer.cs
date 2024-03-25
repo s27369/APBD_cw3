@@ -1,7 +1,7 @@
 ﻿namespace Zadanie3
 {
 
-    public class CoolingContainer
+    public class CoolingContainer:Container
     {
         protected private double _temperature;
         private string _product { get; set; } = "";
@@ -12,11 +12,21 @@
             { "Frozen pizza", -30 }, { "Cheese", 7.2 }, { "Sausages", 5 }, { "Butter", 20.5 }, { "Eggs", 19 }
         };
 
-        public CoolingContainer(string product)
+        public CoolingContainer(int CargoMass, int Height, int ContainerMass, int Depth, int MaxCapacity,
+            string product) : base(CargoMass, Height, ContainerMass, Depth, MaxCapacity)
         {
             _product = product;
             _temperature = _prodTemp[_product];
         }
-        
+
+        public override string getSerialNumber()
+        {
+            return base.getSerialNumber()+"C-"+counter;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

@@ -34,7 +34,7 @@
 
         public override string getSerialNumber()
         {
-            return base.getSerialNumber()+"G"+counter2++;
+            return base.getSerialNumber()+"G-"+counter;
         }
     }
 }

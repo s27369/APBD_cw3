@@ -7,8 +7,8 @@
         private int _maxSpeed { get; }
         private int _maxContainerAmount { get; }
         private int _containerAmount { get; set; }
-        private int _maxCargoWeight { get; }
-        private int _cargoWeight { get; set; }
+        private double _maxCargoWeight { get; }//tonnes
+        private double _cargoWeight { get; set; }
         private static int counter = 0;
         private int _id { get; }
 
@@ -27,13 +27,13 @@
 
         public bool LoadContainer(Container c)
         {
-            if ((_containerAmount >= _maxContainerAmount) || (_cargoWeight + c.getTotalWeight() > _maxCargoWeight))
+            if ((_containerAmount >= _maxContainerAmount) || (_cargoWeight + (double)c.getTotalWeight()/1000 > _maxCargoWeight))
             {
                 Console.WriteLine("Can't load container");
                 return false;
             }
             _containerAmount += 1;
-            _cargoWeight += c.getTotalWeight();
+            _cargoWeight += (double)c.getTotalWeight()/1000;
             _containers.Add(c.getSerialNumber(), c);
             return true;
         }
@@ -71,7 +71,7 @@
             {
                 return false;
             }
-            _cargoWeight -= c.getTotalWeight();
+            _cargoWeight -= (double)c.getTotalWeight()/1000;
             _containerAmount -= 1;
             _containers.Remove(serialNumber);
             return true;
@@ -83,7 +83,7 @@
             {
                 if (pair.Key == serialNumber)
                 {
-                    _cargoWeight -= pair.Value._cargoMass;
+                    _cargoWeight -= (double)pair.Value._cargoMass/1000;
                     pair.Value.Empty();
                     return true;
                 }
@@ -117,14 +117,14 @@
         public override string ToString()
         {
             string msg = "Ship_" + _id + "{\nstats:(";
-            msg += "max speed=" + _maxSpeed + ", max container amount=" + _maxContainerAmount + ", max cargo weight=" +
+            msg += "max speed=" + _maxSpeed + ", max container amount=" + _maxContainerAmount + ", max cargo weight (tonnes)=" +
                    _maxCargoWeight + "),";
-            msg += "\nstatus:(current container amount=" + _containerAmount + ", current cargo weight=" + _cargoWeight +
+            msg += "\nstatus:(current container amount=" + _containerAmount + ", current cargo weight (tonnes)=" + _cargoWeight +
                    "),";
             msg += "\ncontainers:(";
             foreach (var pair in _containers)
             {
-                msg += pair.Value+",\n";
+                msg += pair.Value+"\n";
             }
 
             msg += ")}";

@@ -11,7 +11,7 @@
 
         public override string getSerialNumber()
         {
-            return base.getSerialNumber()+"C"+counter2++;
+            return base.getSerialNumber()+"C-"+counter;
         }
 
         public void SendHazardNotification()
