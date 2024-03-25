@@ -39,18 +39,20 @@ namespace Zadanie3
             
             List<Container> ContainerList = new List<Container>();
             ContainerList.Add(new LiquidContainer(500, 10, 100, 10, 1000, true));
-            Console.WriteLine("teraz");
+            // Console.WriteLine("teraz");
             ContainerList.Add(new LiquidContainer(600, 10, 100, 10, 1000, true));
             ContainerList.Add(new LiquidContainer(950, 10, 100, 10, 1000, false));
             ContainerList.Add(new GasContainer(100, 10, 100, 10, 1000, 1));
             ContainerList.Add(new CoolingContainer(200,10,100,10,500,"Ice Cream"));
             ContainerList.Add(new CoolingContainer(400,10,100,10,500,"Fish"));
+            ContainerList.Add(new CoolingContainer(500,10,100,10,500,"Bananas"));
+            ContainerList.Add(new CoolingContainer(500,10,100,10,500,"Cheese"));
             
             Console.WriteLine("\nloading ships:");
             
             ship1.LoadContainer(liquidContainer1);
             ship1.LoadContainer(gasContainer1);
-            //ship1.LoadContainer(ContainerList);
+            ship1.LoadContainer(ContainerList);
 
             ship2.LoadContainer(gasContainer2);
             ship2.LoadContainer(coolingContainer1);
@@ -58,6 +60,24 @@ namespace Zadanie3
             Console.WriteLine(ship1);
             Console.WriteLine(ship2);
             
+            Console.WriteLine("Moving containers from ship1 to ship2:");
+            ship1.MoveContainer("KON-L-9", ship2);
+            Console.WriteLine(ship1);
+            Console.WriteLine(ship2);
+
+
+            Console.WriteLine("Container operations:");
+            Console.WriteLine("finding container KON-C-12: "+ship1.findContainer("KON-C-12"));
+            Console.WriteLine("unloading KON-C-12...");
+            ship1.UnloadContainer("KON-C-12");
+            Console.WriteLine("finding container KON-C-12: "+ship1.findContainer("KON-C-12"));
+
+            Console.WriteLine("removing KON-C-13...");
+            ship1.RemoveContainer("KON-C-13");
+            Console.WriteLine("replacing KON-G-10 with a different container");
+            Container replacement = new LiquidContainer(1000, 100, 100, 1000);
+            Console.WriteLine(ship1.ReplaceContainer("KON-G-10", replacement));
+            Console.WriteLine(ship1);
         }
     }
 }
