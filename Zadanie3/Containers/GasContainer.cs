@@ -1,4 +1,6 @@
-﻿namespace Zadanie3
+﻿using Zadanie3.Exceptions;
+
+namespace Zadanie3.Containers
 {
     public class GasContainer:Container, IHazardNotifier
     {

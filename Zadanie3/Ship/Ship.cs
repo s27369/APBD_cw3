@@ -1,4 +1,8 @@
-﻿namespace Zadanie3
+﻿using Zadanie3;
+using Zadanie3.Containers;
+using Zadanie3.Exceptions;
+
+namespace Zadanie3.Ships
 {
 
     public class Ship
@@ -121,7 +125,7 @@
                    _maxCargoWeight + "),";
             msg += "\nstatus:(current container amount=" + _containerAmount + ", current cargo weight (tonnes)=" + _cargoWeight +
                    "),";
-            msg += "\ncontainers:(";
+            msg += "\ncontainers:(\n";
             foreach (var pair in _containers)
             {
                 msg += pair.Value+"\n";

@@ -1,4 +1,6 @@
-﻿namespace Zadanie3
+﻿using Zadanie3.Ships;
+using Zadanie3.Exceptions;
+namespace Zadanie3.Containers
 {
 	public abstract class Container
 	{
@@ -8,8 +10,8 @@
 		protected int _depth { get; set; }
 		protected int _maxCapacity { get; set; }
 		protected string _serialNumber { get; set; }
-		protected static int counter2 = 1;
-		protected static int counter { get; } = counter2++;
+		protected static int counter=0;
+		
 
 		public Container(int CargoMass, int Height, int ContainerMass, int Depth, int MaxCapacity)
 		{
@@ -21,7 +23,10 @@
 			_serialNumber = getSerialNumber();
 		}
 
-
+		protected int GenerateId()
+		{
+			return counter++;
+		}
 		public virtual void Empty()
 		{
 			_cargoMass = 0;

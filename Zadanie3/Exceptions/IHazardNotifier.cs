@@ -1,4 +1,4 @@
-﻿namespace Zadanie3
+﻿namespace Zadanie3.Exceptions
 {
     public interface IHazardNotifier
     {
