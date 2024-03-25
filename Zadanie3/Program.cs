@@ -4,6 +4,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
+        Ship ship1 = new Ship(10, 15, 50);
     }
 }

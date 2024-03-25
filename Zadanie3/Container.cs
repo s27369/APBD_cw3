@@ -51,5 +51,10 @@
 		{
 			return _cargoMass + _containerMass;
 		}
+
+		public override string ToString()
+		{
+			return "Container "+_serialNumber+": cargo mass="+_cargoMass+"";
+		}
 	}
 }
