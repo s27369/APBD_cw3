@@ -10,17 +10,25 @@ namespace Zadanie3.Containers
 		protected int _depth { get; set; }
 		protected int _maxCapacity { get; set; }
 		protected string _serialNumber { get; set; }
+		protected int _id;
 		protected static int counter=0;
 		
 
-		public Container(int CargoMass, int Height, int ContainerMass, int Depth, int MaxCapacity)
+		public Container(int CargoMass, int Height, int ContainerMass, int Depth, int MaxCapacity):this( Height,ContainerMass, Depth, MaxCapacity)
 		{
-			_cargoMass = CargoMass;
+			LoadCargo(CargoMass);
+			// Console.WriteLine(this);
+		}
+		public Container( int Height, int ContainerMass, int Depth, int MaxCapacity)
+		{
+			_id = GenerateId();
+			_serialNumber = getSerialNumber();
+			_maxCapacity = MaxCapacity;
 			_height = Height;
 			_containerMass = ContainerMass;
 			_depth = Depth;
-			_maxCapacity = MaxCapacity;
-			_serialNumber = getSerialNumber();
+			_cargoMass = 0;
+			// Console.WriteLine(this);
 		}
 
 		protected int GenerateId()
@@ -38,13 +46,14 @@ namespace Zadanie3.Containers
 			{
 				throw new IncorrectCargoMass("Cargo mass can't be " + weight);
 			}
-			if (this._cargoMass + weight > this._maxCapacity)
+			// Console.WriteLine("cmass="+_cargoMass+", loaded weight="+weight+", max capacity="+_maxCapacity);
+			if ((_cargoMass + weight) > _maxCapacity)
 			{
 				throw new OverfillException(
-					"Capacity for cargo exceeded by " + (this._maxCapacity - this._cargoMass + weight));
+					"Capacity for cargo exceeded by " + ((_cargoMass + weight)- _maxCapacity));
 			}
 				
-			this._cargoMass += weight;
+			_cargoMass += weight;
 		}
 
 		public virtual string getSerialNumber()
@@ -59,7 +68,7 @@ namespace Zadanie3.Containers
 
 		public override string ToString()
 		{
-			return "Container "+_serialNumber+": cargo mass="+_cargoMass+"";
+			return _serialNumber+": total mass(kg)="+getTotalWeight()+", cargo mass(kg)="+_cargoMass+", container mass(kg)="+_containerMass+", max capacity(kg)="+_maxCapacity+", height(cm)="+_height+", depth(cm)="+_depth;
 		}
 	}
 }

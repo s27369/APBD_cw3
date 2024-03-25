@@ -2,6 +2,6 @@
 {
     public interface IHazardNotifier
     {
-        public void SendHazardNotification();
+        public void SendHazardNotification(string msg);
     }
 }

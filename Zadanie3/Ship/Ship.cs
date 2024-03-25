@@ -33,7 +33,8 @@ namespace Zadanie3.Ships
         {
             if ((_containerAmount >= _maxContainerAmount) || (_cargoWeight + (double)c.getTotalWeight()/1000 > _maxCargoWeight))
             {
-                Console.WriteLine("Can't load container");
+                Console.WriteLine("Can't load container "+c);
+                Console.WriteLine(_cargoWeight + (double)c.getTotalWeight()/1000+" vs "+_maxCargoWeight);
                 return false;
             }
             _containerAmount += 1;
