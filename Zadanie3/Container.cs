@@ -2,7 +2,7 @@
 {
 	public abstract class Container
 	{
-		protected int _cargoMass { get; set; }
+		public int _cargoMass { get; set; }
 		protected int _height { get; set; }
 		protected int _containerMass { get; set; }
 		protected int _depth { get; set; }

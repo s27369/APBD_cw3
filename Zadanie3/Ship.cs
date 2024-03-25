@@ -4,17 +4,25 @@
     public class Ship
     {
         private Dictionary<string, Container> _containers = new Dictionary<string, Container>();
-        private int _maxSpeed;
-        private int _maxContainerAmount;
-        private int _containerAmount = 0;
-        private int _maxCargoWeight;
-        private int _cargoWeight = 0;
+        private int _maxSpeed { get; }
+        private int _maxContainerAmount { get; }
+        private int _containerAmount { get; set; }
+        private int _maxCargoWeight { get; }
+        private int _cargoWeight { get; set; }
+        private static int counter = 0;
+        private int _id { get; }
 
         public Ship(int maxSpeed, int maxContainerAmount, int maxCargoWeight)
         {
             _maxSpeed = maxSpeed;
             _maxContainerAmount = maxContainerAmount;
             _maxCargoWeight = maxCargoWeight;
+            _id = GenerateId();
+        }
+
+        private int GenerateId()
+        {
+            return ++counter;
         }
 
         public bool LoadContainer(Container c)
@@ -75,6 +83,7 @@
             {
                 if (pair.Key == serialNumber)
                 {
+                    _cargoWeight -= pair.Value._cargoMass;
                     pair.Value.Empty();
                     return true;
                 }
@@ -103,6 +112,23 @@
 
             RemoveContainer(c.getSerialNumber());
             return ship.LoadContainer(c);
+        }
+
+        public override string ToString()
+        {
+            string msg = "Ship_" + _id + "{\nstats:(";
+            msg += "max speed=" + _maxSpeed + ", max container amount=" + _maxContainerAmount + ", max cargo weight=" +
+                   _maxCargoWeight + "),";
+            msg += "\nstatus:(current container amount=" + _containerAmount + ", current cargo weight=" + _cargoWeight +
+                   "),";
+            msg += "\ncontainers:(";
+            foreach (var pair in _containers)
+            {
+                msg += pair.Value+",\n";
+            }
+
+            msg += ")}";
+            return msg;
         }
     }
 }
